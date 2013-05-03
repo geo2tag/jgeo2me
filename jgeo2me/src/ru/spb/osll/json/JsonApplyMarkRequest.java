@@ -79,9 +79,9 @@ public class JsonApplyMarkRequest extends JsonBaseRequest {
 		jsonObject.put("title", m_title);
 		jsonObject.put("link", m_link);
 		jsonObject.put("description", m_description);
-		jsonObject.put("latitude", new Double (m_latitude));
-		jsonObject.put("longitude",new Double (m_longitude));
-		jsonObject.put("altitude", new Double (m_altitude));
+		jsonObject.put("latitude", m_latitude);
+		jsonObject.put("longitude",m_longitude);
+		jsonObject.put("altitude", m_altitude);
 		jsonObject.put("time", m_time);
 		Log.out.println(JSON_LOG, jsonObject.toString());
 		return JsonBase.instance().doRequest(jsonObject, new URI(m_serverUrl + IRequest.IApplyMark.REQUEST)); // TODO

@@ -217,15 +217,15 @@ public class JSONArray {
 //#      * @throws   JSONException If the key is not found or if the value cannot
 //#      *  be converted to a number.
 //#      */
-//#     public double getDouble(int index) throws JSONException {
-//#         Object o = get(index);
-//#         try {
-//#             return Double.valueOf((String)o).doubleValue();
-//#         } catch (Exception e) {
-//#             throw new JSONException("JSONArray[" + index +
-//#                 "] is not a number.");
-//#         }
-//#     }
+     public double getDouble(int index) throws JSONException {
+         Object o = get(index);
+        try {
+             return Double.valueOf(o.toString()).doubleValue();
+         } catch (Exception e) {
+             throw new JSONException("JSONArray[" + index +
+                 "] is not a number.");
+         }
+     }
 //#endif
 
 //#if CLDC!="1.0"
@@ -238,10 +238,17 @@ public class JSONArray {
 //#      *  be converted to a number.
 //#      *  if the value cannot be converted to a number.
 //#      */
-//#     public int getInt(int index) throws JSONException {
-//#         Object o = get(index);
-//#         return (int)getDouble(index);
-//#     }
+     public int getInt(int index) throws JSONException {
+         Object o = get(index);
+         try {
+        	 
+             return Integer.valueOf(o.toString()).intValue();
+         } catch (Exception e) {
+             throw new JSONException("JSONArray[" + index +
+                 "] is not a number.");
+         }
+       // return (int)getDouble(index);
+     }
 //#endif
 
     /**
@@ -395,9 +402,9 @@ public class JSONArray {
 //#      * @param index The index must be between 0 and length() - 1.
 //#      * @return      The value.
 //#      */
-//#     public double optDouble(int index) {
-//#         return optDouble(index, Double.NaN);
-//#     }
+     public double optDouble(int index) {
+         return optDouble(index, Double.NaN);
+     }
 //#endif
 
 //#if CLDC!="1.0"
@@ -410,13 +417,13 @@ public class JSONArray {
 //#      * @param defaultValue     The default value.
 //#      * @return      The value.
 //#      */
-//#     public double optDouble(int index, double defaultValue) {
-//#         try {
-//#             return getDouble(index);
-//#         } catch (Exception e) {
-//#             return defaultValue;
-//#         }
-//#     }
+    public double optDouble(int index, double defaultValue) {
+         try {
+             return getDouble(index);
+         } catch (Exception e) {
+             return defaultValue;
+         }
+     }
 //#endif
 
 //#if CLDC!="1.0"
@@ -570,12 +577,12 @@ public class JSONArray {
 //#      * @throws JSONException if the value is not finite.
 //#      * @return this.
 //#      */
-//#     public JSONArray put(double value) throws JSONException {
-//#         Double d = new Double(value);
-//#         JSONObject.testValidity(d);
-//#         put(d);
-//#         return this;
-//#     }
+     public JSONArray put(double value) throws JSONException {
+         Double d = new Double(value);
+         JSONObject.testValidity(d);
+         put(d);
+         return this;
+     }
 //#endif
 
     /**
@@ -672,10 +679,10 @@ public class JSONArray {
 //#      * @throws JSONException If the index is negative or if the value is
 //#      * not finite.
 //#      */
-//#     public JSONArray put(int index, double value) throws JSONException {
-//#         put(index, new Double(value));
-//#         return this;
-//#     }
+     public JSONArray put(int index, double value) throws JSONException {
+         put(index, new Double(value));
+         return this;
+     }
 //#endif
 
     /**

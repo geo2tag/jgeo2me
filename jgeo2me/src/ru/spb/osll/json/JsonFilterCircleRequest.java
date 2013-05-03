@@ -56,9 +56,9 @@ public class JsonFilterCircleRequest extends JsonFilterBaseRequest {
 	protected JSONObject getJsonObject() throws JSONException {
 		JSONObject jsonObject = super.getJsonObject();
 		
-		jsonObject.put("latitude", new Double(m_lat));
-		jsonObject.put("longitude", new Double(m_lon));
-		jsonObject.put("radius", new Double(m_rad));
+		jsonObject.put("latitude", m_lat);
+		jsonObject.put("longitude", m_lon);
+		jsonObject.put("radius",m_rad);
 		return jsonObject;
 	}
 

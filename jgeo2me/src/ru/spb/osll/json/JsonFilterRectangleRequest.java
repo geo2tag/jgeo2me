@@ -59,12 +59,12 @@ public class JsonFilterRectangleRequest extends JsonFilterBaseRequest {
 		JSONObject jsonObject = super.getJsonObject();
 		
 		JSONObject latShift = new JSONObject();
-		latShift.put("latitude1", new Double(m_lat1));
-		latShift.put("latitude2",  new Double(m_lat2));
+		latShift.put("latitude1", m_lat1);
+		latShift.put("latitude2",  m_lat2);
 		
 		JSONObject lonShift = new JSONObject();
-		lonShift.put("longitude1", new Double( m_lon1));
-		lonShift.put("longitude2", new Double( m_lon2));
+		lonShift.put("longitude1", m_lon1);
+		lonShift.put("longitude2", m_lon2);
 
 		jsonObject.put("latitude_shift", latShift);
 		jsonObject.put("longitude_shift", lonShift);

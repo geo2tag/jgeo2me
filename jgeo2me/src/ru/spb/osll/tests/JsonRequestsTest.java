@@ -2,6 +2,10 @@ package ru.spb.osll.tests;
 
 import java.util.Vector;
 
+import org.json.me.JSONArray;
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
+
 
 
 import ru.spb.osll.json.Errno;
@@ -129,6 +133,20 @@ public class JsonRequestsTest extends TestCase {
 	
 	private static final String TEST_UNSUBSCRIBE_CHANNEL = "Sales";
 	
+	
+	private static final String TEST_JSON_INT_KEY = "testIntKey";
+	private static final String TEST_JSON_DOUBLE_KEY = "testDoubleKey";
+	private static final String TEST_JSON_STRING_KEY = "testStringKey";
+	
+	private static final int TEST_JSON_INT_VALUE = 12345 ;
+	private static final double TEST_JSON_DOUBLE_VALUE = 123.456;
+	private static final String TEST_JSON_STRING_VALUE = "testString";
+	private static final String TEST_JSON_CORRECT_STRING = 
+			"{\"testIntKey\":12345,\"testArrayKey\":[0,1,2],\"testObjectKey\":{\"testIntKey\":12345,\"testDoubleKey\":123.456,\"testStringKey\":\"testString\"},\"testDoubleKey\":123.456,\"testStringKey\":\"testString\"}";
+	private static final String TEST_JSON_OBJECT_KEY = "testObjectKey";
+	private static final String TEST_JSON_ARRAY_KEY = "testArrayKey";
+	private static final int TEST_JSON_ARRAY_SIZE = 3;
+	
 
 	
 	private final String TEST_LOGIN = "Paul";
@@ -147,7 +165,7 @@ public class JsonRequestsTest extends TestCase {
 	 * @param name this testcase's name.
 	 */
 	public JsonRequestsTest() {
-		super(16, "JsonRequestsTest");
+		super(18, "JsonRequestsTest");
 		
 
 	}
@@ -549,8 +567,92 @@ public class JsonRequestsTest extends TestCase {
 			testVersionRequest();
 			break;
 		}
+		case 16:{
+			testJsonGeneration();
+			break;
+		}
+		case 17:{
+			testJsonParsing();
+			break;
+		}
 
 		}
+	}
+
+
+
+	private void testJsonParsing() {
+		// TODO Auto-generated method stub
+		try{
+			JSONObject testObject = new JSONObject(TEST_JSON_CORRECT_STRING);
+			
+			assertEquals(testObject.getInt(TEST_JSON_INT_KEY),TEST_JSON_INT_VALUE);
+			assertEquals(testObject.getDouble(TEST_JSON_DOUBLE_KEY),TEST_JSON_DOUBLE_VALUE);
+			assertEquals(testObject.getString(TEST_JSON_STRING_KEY),TEST_JSON_STRING_VALUE);
+			
+			JSONObject tmpObject = testObject.getJSONObject(TEST_JSON_OBJECT_KEY);
+			
+			assertNotNull(tmpObject);
+			
+			assertEquals(tmpObject.getInt(TEST_JSON_INT_KEY),TEST_JSON_INT_VALUE);
+			assertEquals(tmpObject.getDouble(TEST_JSON_DOUBLE_KEY),TEST_JSON_DOUBLE_VALUE);
+			assertEquals(tmpObject.getString(TEST_JSON_STRING_KEY),TEST_JSON_STRING_VALUE);
+			
+			JSONArray tmpArray = testObject.getJSONArray(TEST_JSON_ARRAY_KEY);
+			
+			assertNotNull(tmpArray);
+			
+			for (int i=0; i<TEST_JSON_ARRAY_SIZE; i++){
+				Log.out.println(TEST_LOG, tmpArray.get(i).toString()+" "+tmpArray.get(i).getClass().getName());
+				//assertEquals(tmpArray.getInt(i),i);
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			assertTrue(false);
+			
+		}
+	}
+
+
+
+	private void testJsonGeneration() {
+		// TODO Auto-generated method stub
+		JSONObject testObject = new JSONObject();
+		JSONObject tmpObject = new JSONObject();
+		JSONArray tmpArray = new JSONArray();
+		
+		try {
+			testObject.put(TEST_JSON_INT_KEY, TEST_JSON_INT_VALUE);
+			testObject.put(TEST_JSON_DOUBLE_KEY, TEST_JSON_DOUBLE_VALUE);
+			testObject.put(TEST_JSON_STRING_KEY, TEST_JSON_STRING_VALUE);
+			
+			
+			tmpObject.put(TEST_JSON_INT_KEY, TEST_JSON_INT_VALUE);
+			tmpObject.put(TEST_JSON_DOUBLE_KEY, TEST_JSON_DOUBLE_VALUE);
+			tmpObject.put(TEST_JSON_STRING_KEY, TEST_JSON_STRING_VALUE);
+			
+			testObject.put(TEST_JSON_OBJECT_KEY, tmpObject);
+			
+			for (int i=0; i<TEST_JSON_ARRAY_SIZE; i++){
+				tmpArray.put(i);
+			}
+			
+			testObject.put(TEST_JSON_ARRAY_KEY, tmpArray);
+			
+		//	Log.out.println(TEST_LOG, "Generated JSON " + testObject.toString());
+			assertEquals(TEST_JSON_CORRECT_STRING, testObject.toString());
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		
+		//testObject.put(TEST_JSON_OBJECT_KEY, TEST_JSON__VALUE);
+		
 	}
 
 }

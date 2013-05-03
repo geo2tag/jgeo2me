@@ -62,9 +62,9 @@ public class JsonLoadTagsRequest extends JsonBaseRequest {
 	protected JSONObject doRequestInternal() throws JSONException, IOException{
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put(IRequest.ILoadTags.AUTH_TOKEN, m_authToken);
-		jsonObject.put(IRequest.ILoadTags.LATITUDE, new Double(m_latitude));
-		jsonObject.put(IRequest.ILoadTags.LONGITUDE, new Double(m_longitude));
-		jsonObject.put(IRequest.ILoadTags.RADIUS,new Double( m_radius));
+		jsonObject.put(IRequest.ILoadTags.LATITUDE, m_latitude);
+		jsonObject.put(IRequest.ILoadTags.LONGITUDE, m_longitude);
+		jsonObject.put(IRequest.ILoadTags.RADIUS, m_radius);
 		Log.out.println(JSON_LOG, jsonObject.toString());
 		return JsonBase.instance().doRequest(jsonObject, new URI(m_serverUrl + IRequest.ILoadTags.REQUEST));
 	}

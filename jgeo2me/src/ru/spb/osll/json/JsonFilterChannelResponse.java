@@ -66,9 +66,9 @@ public class JsonFilterChannelResponse extends JsonBaseResponse {
 					mark.setTitle(jmark.getString("title"));
 					mark.setLink(jmark.getString("link"));
 					mark.setDescription(jmark.getString("description"));
-					mark.setLatitude(Double.parseDouble(jmark.getString("latitude")));
-					mark.setLongitude(Double.parseDouble(jmark.getString("longitude")));
-					mark.setAltitude(Double.parseDouble(jmark.getString("altitude")));
+					mark.setLatitude(jmark.getDouble("latitude"));
+					mark.setLongitude(jmark.getDouble("longitude"));
+					mark.setAltitude(jmark.getDouble("altitude"));
 					mark.setTime(jmark.getString("pubDate"));
 
 					channel.addMark(mark);

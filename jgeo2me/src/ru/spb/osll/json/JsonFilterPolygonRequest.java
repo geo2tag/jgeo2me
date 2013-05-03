@@ -63,8 +63,8 @@ public class JsonFilterPolygonRequest extends JsonFilterBaseRequest {
 			GeoPoint point = (GeoPoint) m_points.elementAt(i);
 			JSONObject jpoint = new JSONObject();
 			jpoint.put("number", i);
-			jpoint.put("latitude", new Double( point.x()));
-			jpoint.put("longitude", new Double(point.y()));
+			jpoint.put("latitude", point.x());
+			jpoint.put("longitude",point.y());
 			jpoints.put(jpoint);
 		}		
 		jsonObject.put("polygon", jpoints);

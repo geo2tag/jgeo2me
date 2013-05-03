@@ -82,8 +82,8 @@ abstract class JsonFilterBaseRequest extends JsonBaseRequest {
 		jsonObject.put(IRequest.IBaseFilter.TIME_TO, m_timeTo);
 		if (m_is3d) {
 			JSONObject altObject = new JSONObject();
-			altObject.put(IRequest.IBaseFilter.ALT1, new Double (m_altitude1));
-			altObject.put(IRequest.IBaseFilter.ALT2, new Double (m_altitude2));
+			altObject.put(IRequest.IBaseFilter.ALT1,m_altitude1);
+			altObject.put(IRequest.IBaseFilter.ALT2, m_altitude2);
 			jsonObject.put(IRequest.IBaseFilter.ALT_SHIFT, altObject);
 		}
 		return jsonObject;

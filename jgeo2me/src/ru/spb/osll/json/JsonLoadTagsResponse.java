@@ -70,9 +70,9 @@ public class JsonLoadTagsResponse extends JsonBaseResponse {
 						mark.setTitle(jmarks.getJSONObject(j).getString("title"));
 						mark.setLink(jmarks.getJSONObject(j).getString("link"));
 						mark.setDescription(jmarks.getJSONObject(j).getString("description"));
-						mark.setLatitude(Double.parseDouble(jmarks.getJSONObject(j).getString("latitude")));
-						mark.setLongitude(Double.parseDouble(jmarks.getJSONObject(j).getString("longitude")));
-						mark.setAltitude(Double.parseDouble(jmarks.getJSONObject(j).getString("altitude")));
+						mark.setLatitude(jmarks.getJSONObject(j).getDouble("latitude"));
+						mark.setLongitude(jmarks.getJSONObject(j).getDouble("longitude"));
+						mark.setAltitude(jmarks.getJSONObject(j).getDouble("altitude"));
 						mark.setTime(jmarks.getJSONObject(j).getString("pubDate"));
 
 						channel.addMark(mark);
