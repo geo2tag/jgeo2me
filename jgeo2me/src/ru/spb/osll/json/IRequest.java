@@ -94,7 +94,9 @@ public interface IRequest {
 		
 		String ALT_SHIFT 		= "altitude_shift";
 		String ALT1 			= "altitude1";
-		String ALT2 			= "altitude2";		
+		String ALT2 			= "altitude2";	
+		
+		String TAG_NUMBER		= "tag_number";
 	}
 	
 	public interface ISubscribeChannel {
