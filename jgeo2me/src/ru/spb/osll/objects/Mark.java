@@ -121,4 +121,21 @@ public class Mark {
 				+ "\n, description=" + description + "\n, latitude=" + latitude
 				+ "\n, longitude=" + longitude + "\n, time=" + time + "]";
 	}	
+	
+	public boolean equeals (Object other){
+		if (other instanceof Mark ){
+			Mark mark = (Mark)other;
+			if (mark.toString().equals(toString()))
+				return true;
+			else 
+				return false;
+			
+		}else{
+			return false;
+		}
+	}
+	
+	public int hashCode(){
+		return toString().hashCode();
+	}
 }

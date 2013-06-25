@@ -7,10 +7,16 @@
 .metadata
 bin/
 tmp/
+*.class
+deployed/
+.mtj.tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
+*.class
+*.jar
+*.jad
 local.properties
 .classpath
 .settings/

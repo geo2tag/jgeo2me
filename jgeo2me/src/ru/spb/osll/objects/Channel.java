@@ -127,4 +127,19 @@ public class Channel {
 		this.marks.addElement(mark);
 	}
 	
+	public boolean equals(Object other){
+		if (!(other instanceof Channel))
+		return false;
+		
+		Channel channel = (Channel)other; 
+		
+		if (getName().equals(channel.getName()))
+			return true;
+		
+		return false;
+	}
+	
+	public int hashCode(){
+		return getName().hashCode();
+	}
 }
