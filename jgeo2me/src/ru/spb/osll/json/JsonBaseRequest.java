@@ -62,17 +62,11 @@ public abstract class JsonBaseRequest {
 		return m_serverUrl;
 	}
 	
-	public JSONObject doRequest(){
+	public JSONObject doRequest()throws JSONException, IOException{
 		JSONObject resultJSON = null; 
-		try {
-			resultJSON = doRequestInternal(); 
-		} catch (Exception e) {
-			if (e != null && e.getMessage() != null){
-				Log.err.println(JSON_LOG, e.getMessage());
-			} else {
-				Log.err.println(JSON_LOG, "unknown error...");
-			}
-		}
+		
+		resultJSON = doRequestInternal(); 
+
 		return resultJSON;
 	}	
 

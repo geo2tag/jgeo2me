@@ -3,6 +3,10 @@
  */
 package ru.spb.osll.json;
 
+
+import java.io.IOException;
+
+import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
 /**
@@ -19,13 +23,23 @@ public class RequestSender {
 		JSONObject jsonObject = null;
 		
 		for (int i=0; i < REQUEST_ATTEMPTS; i++){
-			jsonObject = req.doRequest();
+			try {
+				jsonObject = req.doRequest();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new JsonRequestException(JsonRequestException.JSON_RESPONSE_EXCEPTION);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new JsonRequestException(JsonRequestException.IO_EXCEPTION);
+			}
 			if (jsonObject != null) break;
 	
 		}
 		
 		if (jsonObject == null) {
-			throw new JsonRequestException("Server response is empty!!");
+			throw new JsonRequestException(JsonRequestException.EMPTY_RESPONSE_MESSAGE);
 		}
 		
 		res.parseJson(jsonObject);
@@ -35,7 +49,7 @@ public class RequestSender {
 			if (errno == errnos[i]) return;
 		}
 		
-		throw new JsonRequestException("Errno value is not expected: "+ new Integer(errno).toString());
+		throw new JsonRequestException(errno);
 		
 	}
 }

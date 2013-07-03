@@ -75,8 +75,8 @@ public class JsonBase {
     
     
 	public  JSONObject doRequest(JSONObject jsonObject, URI  uri) 
-			throws IOException, JSONException, IllegalArgumentException{
-		byte[] postData = jsonObject.toString().getBytes("UTF-8");
+			throws JSONException, IOException{
+		
 		HttpConnection c = null;
 	    OutputStream os = null;
 	    InputStreamReader is = null;
@@ -86,8 +86,10 @@ public class JsonBase {
 	    Log.out.println("JsonLog", uri.toString());
 	        
 	    try {
+	    	
+	    	byte[] postData = jsonObject.toString().getBytes("UTF-8");
 	        c = (HttpConnection)Connector.open(uri.toString());
-
+	        
 	        c.setRequestMethod(HttpConnection.POST);
 	        c.setRequestProperty("User-Agent",
 	            "Profile/MIDP-2.0 Configuration/CLDC-1.0");
@@ -112,10 +114,13 @@ public class JsonBase {
 	        
 	        result = new JSONObject(resultString);
 	         
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    	Log.out.println("JsonLog", "EXCEPTION!!!\n" + e.toString());
-	       
+	    } catch (JSONException e) {
+	        e.printStackTrace();    
+	    	throw e;
+	    } catch (IOException e) {
+	        e.printStackTrace();    
+	    	throw e;
+	    		
 	    }finally{
 	    	if (os != null)
 	            os.close();
