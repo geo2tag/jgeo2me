@@ -11,7 +11,7 @@ import org.json.me.JSONObject;
 
 /**
  * Class performs common routines for REST requests sending
- * @author Mark Zsalavskiy
+ * @author Mark Zaslavskiy
  *
  */
 public class RequestSender {
@@ -28,18 +28,23 @@ public class RequestSender {
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				throw new JsonRequestException(JsonRequestException.JSON_RESPONSE_EXCEPTION);
+				throw new JsonRequestException(Errno.JSON_RESPONSE_EXCEPTION.intValue());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				throw new JsonRequestException(JsonRequestException.IO_EXCEPTION);
+				throw new JsonRequestException(Errno.IO_EXCEPTION.intValue());
 			}
-			if (jsonObject != null) break;
+			if (jsonObject != null){
+				System.out.println("jsonObject != null");
+				System.out.println(jsonObject.toString());
+				break;
+			}
 	
 		}
 		
 		if (jsonObject == null) {
-			throw new JsonRequestException(JsonRequestException.EMPTY_RESPONSE_MESSAGE);
+			System.out.println("jsonObject == null");
+			throw new JsonRequestException(Errno.EMPTY_RESPONSE_EXCEPTION.intValue());
 		}
 		
 		res.parseJson(jsonObject);

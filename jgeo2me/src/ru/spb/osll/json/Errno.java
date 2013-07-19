@@ -37,6 +37,12 @@ import java.util.Hashtable;
 
 public class Errno {
 
+	public static String UNKNOWN_ERROR_STRING = "Unknown error";
+	
+	public static Integer EMPTY_RESPONSE_EXCEPTION          = new Integer(-3);
+	public static Integer JSON_RESPONSE_EXCEPTION           = new Integer(-2);
+	public static Integer IO_EXCEPTION                      = new Integer(-1);
+	
     public static Integer SUCCESS                           = new Integer(0);
     public static Integer WRONG_TOKEN_ERROR                 = new Integer(1);
     public static Integer USER_ALREADY_EXIST_ERROR          = new Integer(2);
@@ -57,12 +63,16 @@ public class Errno {
     public static Integer TMP_USER_ALREADY_EXIST_ERROR      = new Integer(17);
     public static Integer NETWORK_ERROR                     = new Integer(18);
     public static Integer EMAIL_ALREADY_EXIST_ERROR         = new Integer(19);
-    public static Integer WEAK_PASSWORD_ERROR	        = new Integer(20);
-    public static Integer NOT_SUPPORTED         		= new Integer(21);
+    public static Integer WEAK_PASSWORD_ERROR	    	    = new Integer(20);
+    public static Integer NOT_SUPPORTED         			= new Integer(21);
     public static Integer DB_DOES_NOT_EXIST_ERROR         	= new Integer(22);
 
     private static Hashtable emap = new Hashtable();
     static {
+    	emap.put(IO_EXCEPTION,                      "IO_EXCEPTION");					// -1
+    	emap.put(JSON_RESPONSE_EXCEPTION,			"JSON_RESPONSE_EXCEPTION");			// -2
+    	emap.put(EMPTY_RESPONSE_EXCEPTION,			"EMPTY_RESPONSE_EXCEPTION");		// -3
+    	
         emap.put(SUCCESS,                           "SUCCESS");                         // 0
         emap.put(WRONG_TOKEN_ERROR,                 "WRONG_TOKEN_ERROR");               // 1
         emap.put(USER_ALREADY_EXIST_ERROR,          "USER_ALREADY_EXIST_ERROR");        // 2
@@ -83,13 +93,17 @@ public class Errno {
         emap.put(TMP_USER_ALREADY_EXIST_ERROR,      "TMP_USER_ALREADY_EXIST_ERROR");    // 17
         emap.put(NETWORK_ERROR,                     "NETWORK_ERROR");                   // 18
         emap.put(EMAIL_ALREADY_EXIST_ERROR,         "EMAIL_ALREADY_EXIST_ERROR");       // 19
-        emap.put(WEAK_PASSWORD_ERROR,		    "WEAK_PASSWORD_ERROR");       	// 20
-        emap.put(NOT_SUPPORTED,			    "NOT_SUPPORTED");       		// 21
+        emap.put(WEAK_PASSWORD_ERROR,			    "WEAK_PASSWORD_ERROR");       	// 20
+        emap.put(NOT_SUPPORTED,			    		"NOT_SUPPORTED");       		// 21
         emap.put(DB_DOES_NOT_EXIST_ERROR,           "DB_DOES_NOT_EXIST_ERROR");       	// 22
     }
 	
 	public static String getErrorByCode(int error) {
-		return (String) emap.get(new Integer(error));
+		
+		if (emap.contains(new Integer(error)))
+			return (String) emap.get(new Integer(error));
+		else
+			return UNKNOWN_ERROR_STRING;
 	}
 
 }
