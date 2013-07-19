@@ -40,8 +40,6 @@ import java.io.IOException;
 import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
-import ru.spb.osll.log.Log;
-
 public abstract class JsonBaseRequest {
 	public String JSON_LOG = JsonBase.LOG;
 
