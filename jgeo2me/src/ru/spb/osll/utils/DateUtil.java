@@ -40,9 +40,7 @@ public class DateUtil {
         
         public static String getTime(Date date){
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(date);
-                
-                
+                cal.setTime(date);          
                 
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int month = cal.get(Calendar.MONTH)+1;
@@ -53,7 +51,7 @@ public class DateUtil {
                 int millisecond = cal.get(Calendar.MILLISECOND);
                 
                 System.out.println("Month " + month);
-//      "dd MM yyyy HH:mm:ss.SSS";              
+                // Format = "dd MM yyyy HH:mm:ss.SSS";              
                 
                 String currentTime = 
                                 identNumberWithZeros(day,2) + " " +
@@ -80,4 +78,23 @@ public class DateUtil {
                 return getTime(cal.getTime());
         }
 	
+        public static Date fromString(String dateString){
+        	Date date = null;
+        	
+            Calendar cal = Calendar.getInstance();
+            int day = Integer.parseInt(dateString.substring(0, 1));
+            int month = Integer.parseInt(dateString.substring(3, 4)) - 1;
+            int year = Integer.parseInt(dateString.substring(6, 9));
+            int hour = Integer.parseInt(dateString.substring(11, 12));
+            int minute = Integer.parseInt(dateString.substring(14, 15));
+            int second = Integer.parseInt(dateString.substring(17, 18));
+            int millisecond = Integer.parseInt(dateString.substring(20, 22));
+        	
+            cal.set(year, month, day, hour, minute, second);
+            cal.set(Calendar.MILLISECOND, millisecond);
+            
+            date = cal.getTime();
+            
+        	return date;
+        }
 }
