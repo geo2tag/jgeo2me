@@ -64,8 +64,9 @@ public class Errno {
     public static Integer NETWORK_ERROR                     = new Integer(18);
     public static Integer EMAIL_ALREADY_EXIST_ERROR         = new Integer(19);
     public static Integer WEAK_PASSWORD_ERROR	    	    = new Integer(20);
-    public static Integer NOT_SUPPORTED         			= new Integer(21);
-    public static Integer DB_DOES_NOT_EXIST_ERROR         	= new Integer(22);
+    public static Integer NOT_SUPPORTED    		    = new Integer(21);
+    public static Integer DB_DOES_NOT_EXIST_ERROR           = new Integer(22);
+    public static Integer USER_DOES_NOT_OWN_CHANNEL_ERROR   = new Integer(23);
 
     private static Hashtable emap = new Hashtable();
     static {
@@ -96,6 +97,7 @@ public class Errno {
         emap.put(WEAK_PASSWORD_ERROR,			    "WEAK_PASSWORD_ERROR");       	// 20
         emap.put(NOT_SUPPORTED,			    		"NOT_SUPPORTED");       		// 21
         emap.put(DB_DOES_NOT_EXIST_ERROR,           "DB_DOES_NOT_EXIST_ERROR");       	// 22
+        emap.put(USER_DOES_NOT_OWN_CHANNEL_ERROR,   "USER_DOES_NOT_OWN_CHANNEL_ERROR"); // 23
     }
 	
 	public static String getErrorByCode(int error) {

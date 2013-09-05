@@ -161,4 +161,14 @@ public interface IRequest {
 
         String DB_NAME = "db_name";
     }
+
+
+    public interface IAlterChannel {
+	String REQUEST = "/alterChannel";
+	String AUTH_TOKEN = "auth_token";
+
+        String NAME = "name";
+        String VALUE = "value";
+        String FIELD = "field";
+    }
 }

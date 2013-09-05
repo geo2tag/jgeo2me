@@ -146,15 +146,18 @@ public class JsonRequestsTest extends TestCase {
 	private static final String TEST_JSON_OBJECT_KEY = "testObjectKey";
 	private static final String TEST_JSON_ARRAY_KEY = "testArrayKey";
 	private static final int TEST_JSON_ARRAY_SIZE = 3;
+		
+	private static final String TEST_LOGIN = "Paul";
+	private static final String TEST_PASSWORD = "test";
 	
+	private static final String TEST_SERVER = "http://demo64.geo2tag.org/service";
+	private static final String TEST_LOG = "JMEGEO_TEST";
+	
+	private static final String TEST_ALTER_CHANNEL_FIELD = "url";
+	private static final String TEST_ALTER_CHANNEL_VALUE = "test_url";
+	private static final String TEST_ALTER_CHANNEL_NAME = "Rom";
 
-	
-	private final String TEST_LOGIN = "Paul";
-	private final String TEST_PASSWORD = "test";
-	
-	private final String TEST_SERVER = "http://demo64.geo2tag.org/service";
-	private final String TEST_LOG = "JMEGEO_TEST";
-	
+
 	private String m_authToken = "";
 	
 	/**
@@ -165,7 +168,7 @@ public class JsonRequestsTest extends TestCase {
 	 * @param name this testcase's name.
 	 */
 	public JsonRequestsTest() {
-		super(18, "JsonRequestsTest");
+		super(19, "JsonRequestsTest");
 		
 
 	}
@@ -575,6 +578,9 @@ public class JsonRequestsTest extends TestCase {
 			testJsonParsing();
 			break;
 		}
+		case 18:
+			testJsonAlterChannel();
+			break;
 
 		}
 	}
@@ -653,6 +659,25 @@ public class JsonRequestsTest extends TestCase {
 		
 		//testObject.put(TEST_JSON_OBJECT_KEY, TEST_JSON__VALUE);
 		
+	}
+
+	private void testJsonAlterChannel(){
+		JsonAlterChannelRequest req = new JsonAlterChannelRequest
+				(m_authToken, TEST_ALTER_CHANNEL_NAME, TEST_ALTER_CHANNEL_FIELD, TEST_ALTER_CHANNEL_VALUE, TEST_SERVER);
+		
+		JsonAlterChannelResponse res = new JsonAlterChannelResponse();
+		int[] errnos = {Errno.USER_DOES_NOT_OWN_CHANNEL_ERROR.intValue()};
+		
+		
+		try {
+			RequestSender.performRequest(req, res, errnos);
+			m_authToken = res.getAuthString();
+		} catch (JsonRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			assertTrue(false);
+		}
+
 	}
 
 }
