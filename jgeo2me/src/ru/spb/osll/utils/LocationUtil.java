@@ -31,8 +31,8 @@ public class LocationUtil {
 		}
 		
 		Criteria criteria = new Criteria();
-        criteria.setHorizontalAccuracy(500);
-        LocationProvider locationProvider;
+		criteria.setHorizontalAccuracy(500);
+		LocationProvider locationProvider;
 		try {
 			locationProvider = LocationProvider.getInstance(criteria);
 			Location location = locationProvider.getLocation(10);	        
@@ -43,7 +43,7 @@ public class LocationUtil {
 		}
 	}
 	
-	private static boolean isLocationSupported() {
+	public static boolean isLocationSupported() {
         boolean isItTrue = true;
             try {
                 Class.forName("javax.microedition.location.Location");

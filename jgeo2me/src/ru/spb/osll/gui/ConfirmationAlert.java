@@ -92,6 +92,6 @@ public class ConfirmationAlert{
 	public void showAlert(){
 		System.out.println(m_alert.toString() + " " + (m_display == null) );
 		
-		m_display.setCurrent(m_alert, m_display.getCurrent());
-	}
+		m_display.setCurrent(m_alert, m_displayable);
+	} 
 }

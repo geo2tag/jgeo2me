@@ -11,6 +11,8 @@ import org.json.me.JSONObject;
 import ru.spb.osll.json.Errno;
 import ru.spb.osll.json.JsonAddUserRequest;
 import ru.spb.osll.json.JsonAddUserResponse;
+import ru.spb.osll.json.JsonAlterChannelRequest;
+import ru.spb.osll.json.JsonAlterChannelResponse;
 import ru.spb.osll.json.JsonApplyChannelRequest;
 import ru.spb.osll.json.JsonApplyChannelResponse;
 import ru.spb.osll.json.JsonApplyMarkRequest;
@@ -150,7 +152,7 @@ public class JsonRequestsTest extends TestCase {
 	private static final String TEST_LOGIN = "Paul";
 	private static final String TEST_PASSWORD = "test";
 	
-	private static final String TEST_SERVER = "http://demo64.geo2tag.org/service";
+	private static final String TEST_SERVER = "http://194.85.173.9:20005/service";
 	private static final String TEST_LOG = "JMEGEO_TEST";
 	
 	private static final String TEST_ALTER_CHANNEL_FIELD = "url";
@@ -671,7 +673,6 @@ public class JsonRequestsTest extends TestCase {
 		
 		try {
 			RequestSender.performRequest(req, res, errnos);
-			m_authToken = res.getAuthString();
 		} catch (JsonRequestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

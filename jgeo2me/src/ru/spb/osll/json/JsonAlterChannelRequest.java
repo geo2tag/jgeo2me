@@ -36,11 +36,9 @@
 package ru.spb.osll.json;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
 
 import ru.spb.osll.log.Log;
 
@@ -61,8 +59,7 @@ public class JsonAlterChannelRequest extends JsonBaseRequest {
 		m_serverUrl = serverUrl;
 	}
 	
-	protected JSONObject doRequestInternal() throws JSONException, IOException,
-			URISyntaxException {
+	protected JSONObject doRequestInternal() throws JSONException, IOException {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put(IRequest.IAlterChannel.AUTH_TOKEN, m_authToken);
 		jsonObject.put(IRequest.IAlterChannel.NAME, m_name);
