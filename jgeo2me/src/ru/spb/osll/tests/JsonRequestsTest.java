@@ -13,6 +13,8 @@ import ru.spb.osll.json.JsonAddUserRequest;
 import ru.spb.osll.json.JsonAddUserResponse;
 import ru.spb.osll.json.JsonAlterChannelRequest;
 import ru.spb.osll.json.JsonAlterChannelResponse;
+import ru.spb.osll.json.JsonChangePasswordRequest;
+import ru.spb.osll.json.JsonChangePasswordResponse;
 import ru.spb.osll.json.JsonApplyChannelRequest;
 import ru.spb.osll.json.JsonApplyChannelResponse;
 import ru.spb.osll.json.JsonApplyMarkRequest;
@@ -160,6 +162,11 @@ public class JsonRequestsTest extends TestCase {
 	private static final String TEST_ALTER_CHANNEL_NAME = "Rom";
 
 
+	private static final String TEST_CHANGE_PASSWORD_LOGIN = "Not_existing_user";
+	private static final String TEST_CHANGE_PASSWORD_PASSWORD = "test";
+	private static final String TEST_CHANGE_PASSWORD_NEW_PASSWORD = "test";
+
+
 	private String m_authToken = "";
 	
 	/**
@@ -170,7 +177,7 @@ public class JsonRequestsTest extends TestCase {
 	 * @param name this testcase's name.
 	 */
 	public JsonRequestsTest() {
-		super(19, "JsonRequestsTest");
+		super(20, "JsonRequestsTest");
 		
 
 	}
@@ -583,7 +590,10 @@ public class JsonRequestsTest extends TestCase {
 		case 18:
 			testJsonAlterChannel();
 			break;
-
+		}
+		case 19:
+			testJsonChagePassword();
+			break;
 		}
 	}
 
@@ -670,6 +680,24 @@ public class JsonRequestsTest extends TestCase {
 		JsonAlterChannelResponse res = new JsonAlterChannelResponse();
 		int[] errnos = {Errno.USER_DOES_NOT_OWN_CHANNEL_ERROR.intValue()};
 		
+		
+		try {
+			RequestSender.performRequest(req, res, errnos);
+		} catch (JsonRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			assertTrue(false);
+		}
+
+	}
+
+	private void testJsonChangePassword(){
+		JsonChangePasswordRequest req = new JsonChangePasswordRequest
+				(TEST_CHANGE_PASSWORD_LOGIN, TEST_CHANGE_PASSWORD_PASSWORD, 
+				TEST_CHANGE_PASSWORD_NEW_PASSWORD, TEST_SERVER);
+		
+		JsonChangePasswordResponse res = new JsonChangePasswordResponse();
+		int[] errnos = {Errno.INCORRECT_CREDENTIALS_ERROR.intValue()};
 		
 		try {
 			RequestSender.performRequest(req, res, errnos);
