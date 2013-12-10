@@ -178,4 +178,14 @@ public interface IRequest {
         String PASSWORD = "password";
         String NEW_PASSWORD = "new_password";
     }
+    
+	public interface  IFilterSubstring{
+
+		String AUTH_TOKEN = "auth_token";
+		String FIELD = "field";
+		String SUBSTRING = "substring";
+		String TAG_NUMBER = "tag_number";
+		String REQUEST = "/filterSubstring";
+		
+	}
 }

@@ -28,6 +28,7 @@ import ru.spb.osll.json.JsonFilterFenceRequest;
 import ru.spb.osll.json.JsonFilterPolygonRequest;
 import ru.spb.osll.json.JsonFilterRectangleRequest;
 import ru.spb.osll.json.JsonFilterResponse;
+import ru.spb.osll.json.JsonFilterSubstringRequest;
 import ru.spb.osll.json.JsonLoadTagsRequest;
 import ru.spb.osll.json.JsonLoadTagsResponse;
 import ru.spb.osll.json.JsonLoginRequest;
@@ -167,6 +168,10 @@ public class JsonRequestsTest extends TestCase {
 	private static final String TEST_CHANGE_PASSWORD_NEW_PASSWORD = "test";
 
 
+	private static final String TEST_FILTER_SUBSTRING_FIELD = "label";
+	private static final String TEST_FILTER_SUBSTRING_SUBSTRING = "test";
+
+	
 	private String m_authToken = "";
 	
 	/**
@@ -177,7 +182,7 @@ public class JsonRequestsTest extends TestCase {
 	 * @param name this testcase's name.
 	 */
 	public JsonRequestsTest() {
-		super(20, "JsonRequestsTest");
+		super(21, "JsonRequestsTest");
 		
 
 	}
@@ -516,7 +521,6 @@ public class JsonRequestsTest extends TestCase {
 		switch (testNumber) {
 		case 0:{
 			testLoginRequest();
-
 			break;
 		}
 		case 1:{
@@ -587,14 +591,39 @@ public class JsonRequestsTest extends TestCase {
 			testJsonParsing();
 			break;
 		}
-		case 18:
+		case 18:{
 			testJsonAlterChannel();
 			break;
 		}
-		case 19:
-			testJsonChagePassword();
+		case 19:{
+			testJsonChangePassword();
 			break;
 		}
+		case 20:{
+			testJsonFilterSubstring();
+			break;
+		}
+		}
+		
+	}
+
+
+
+	private void testJsonFilterSubstring() {
+		// TODO Auto-generated method stub
+		JsonFilterSubstringRequest req = new JsonFilterSubstringRequest
+				(m_authToken, TEST_FILTER_SUBSTRING_FIELD, TEST_FILTER_SUBSTRING_SUBSTRING,  TEST_SERVER);
+		
+		JsonFilterSubstringResponse res = new JsonFilterSubstringResponse();
+		int[] errnos = {Errno.SUCCESS.intValue()};
+		
+		try {
+			RequestSender.performRequest(req, res, errnos);
+		} catch (JsonRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			assertTrue(false);
+		}	
 	}
 
 
